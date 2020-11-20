@@ -57,6 +57,26 @@
           })
         );
       };
+      document.querySelector("#chat-message-input").onkeyup = function (e) {
+        let message;
+        if (e.keyCode === 8) {
+          message = "back_space";
+        } else {
+          const messageInputDom = document.querySelector("#chat-message-input");
+          message = messageInputDom.value;
+          messageInputDom.value = "";
+        }
+
+        chatSocket.send(
+          JSON.stringify({
+            message: message,
+          })
+        );
+      };
     </script>
   </body>
 </html>
+
+/*
+https://stackoverflow.com/questions/2897155/get-cursor-position-in-characters-within-a-text-input-field
+https://stackoverflow.com/questions/4928586/get-caret-position-in-html-input */
